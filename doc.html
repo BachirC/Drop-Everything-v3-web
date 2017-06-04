@@ -94,6 +94,10 @@ title: Documentation
       </a>
     </li>
   </p>
+  <p>
+    When no repos are supplied to the command, DEv3 will send an error message specifying
+    the error details.
+  </p>
   <br/>
 
   <h3 id="unwatchrepos">/unwatchrepos</h3>
@@ -121,22 +125,26 @@ title: Documentation
       it.</li>
     <li>The repo has not been found.</li>
   </p>
+  <p>
+    When no repos are supplied to the command, DEv3 will send an error message specifying
+    the error details.
+  </p>
 </section>
 
 <section class="bs-docs-section">
-  <h1 id="Messages" class="page-header">Messages</h1>
+  <h1 id="GitHub-activity-messages" class="page-header">GitHub activity messages</h1>
   <blockquote>
     The bread and butter of DEv3. Messages are the primary mean of DEv3 to notify the
     user via Slack about his activity on GitHub or to respond to a Slack command. Messages
     are posted in the
     <a href="https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages">
-        private Direct Message channel
+        Slack private Direct Message channel
     </a>
-    between the user and DEv3 Slack bot <strong>dropeverything</strong>. You will find in
+    between the user and DEv3 bot <strong>dropeverything</strong>. You will find in
     this section a full description of every message sent by DEv3 and how a user can interact with them.
   </blockquote>
 
-  <h3 id="GitHub-activity-messages">GitHub activity messages</h3>
+  <h3 id="Messages-list">Messages definition</h3>
   <p>
     Messages related to the user activity on GitHub. They are built and delivered using
     data from GitHub webhooks set before.</p>
@@ -145,4 +153,43 @@ title: Documentation
   <h4 id="comments-review-msg">Review submitted</h4>
   <p>Comments review</p>
   <img src="assets/images/comments_review_msg.png" width="60%"/>
+
+  <h3 id="Message-interactions">Message interactions</h3>
+  <p>
+    DEv3 leverages a cool feature of Slack API namely <a
+      href="https://api.slack.com/interactive-messages"> interactive messages</a>.
+    Broadly, it allows a user to trigger one or multiple actions after receiving a Slack message
+    containing elements for interacting with it (buttons, menus). DEv3 uses this API
+    to allow users to interact with DEv3 messages in Slack by muting/unmuting issues or pull
+    requests, or snoozing messages.
+  </p>
+  <h4 id="Message-interactions-mute">Mute</h4>
+  <p>
+    By clicking on the "Mute Issue" button, the user won't receive any
+    further messages related to the issue. Clicking again will unmute the issue.
+  </p>
+  <h4 id="Message-interactions-unmute">Unmute</h4>
+  <p>
+    By clicking on the "Unmute" button, the user will again receive messages related to
+    the issue. Clicking again will mute the issue.
+  </p>
+  <h4 id="Message-interactions-snooze">Snooze</h4>
+  <p>
+    A user can snooze a message to be able to act upon it at a more convenient moment. By
+    clicking on the "Snooze..." button, a menu will show with two options(1 hour or
+    tomorrow). The message will then be delivered at the chosen moment.
+  </p>
+  <img src="assets/images/message_interactions_snooze.png" width="60%"/>
+  <br/>
+  <br/>
+  <div class="alert alert-info" role="alert"> <strong>Note:</strong>
+    The snoozed version of the message received contains the time at which the original
+    message has been sent.
+  </div>
+  <div class="alert alert-warning" role="alert"> <strong>Note:</strong>
+    The snoozed version of the message received doesn't have a mute button. You can only
+    mute from the original message. It is so to keep consistency with the muting status of
+    the issue (or pull request), as it would be required to update all snoozed versions
+    of a message "Mute" button to reflect the status of the issue.
+  </div>
 </section>
