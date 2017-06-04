@@ -2,6 +2,9 @@
  * Overwrites
  */
 /* Menu subtitles */
+a {
+  text-decoration: none !important;
+}
 .bs-docs-sidebar .nav .nav>li>a {
   color: black;
 }
