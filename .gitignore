@@ -4,3 +4,6 @@
 /dist/jquery
 /.idea
 /*.iml
+*.swp
+*.swo
+*.swe

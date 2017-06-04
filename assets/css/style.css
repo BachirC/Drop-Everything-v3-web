@@ -1,6 +1,26 @@
 /**
  * Overwrites
  */
+/* Menu subtitles */
+.bs-docs-sidebar .nav .nav>li>a {
+  color: black;
+}
+
+.bs-docs-sidebar .nav>li>a:hover, .bs-docs-sidebar .nav>.active>a, .bs-docs-sidebar .nav>.active:hover>a, .bs-docs-sidebar .nav>.active:focus>a {
+  color: black;
+  border-left: 2px solid black;
+}
+/* Navbar and Menu titles */
+.bs-docs-nav .navbar-brand,
+.bs-docs-nav .navbar-nav>li>a,
+.bs-docs-sidebar .nav>li>a,
+.bs-docs-nav .navbar-nav>li>a:hover,
+.bs-docs-nav .navbar-nav>.active>a,
+.bs-docs-nav .navbar-nav>.active>a:hover
+{
+  color: black;
+}
+
 .bs-docs-masthead {
   padding-top: 50px;
   padding-bottom: 40px;
