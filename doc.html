@@ -134,26 +134,49 @@ title: Documentation
 <section class="bs-docs-section">
   <h1 id="GitHub-activity-messages" class="page-header">GitHub activity messages</h1>
   <blockquote>
-    The bread and butter of DEv3. Messages are the primary mean of DEv3 to notify the
-    user via Slack about his activity on GitHub or to respond to a Slack command. Messages
-    are posted in the
+    Messages are the bread and butter of DEv3. Their function is to notify the
+    user via Slack about his activity on GitHub using GitHub webhooks. Messages are posted in the
     <a href="https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages">
-        Slack private Direct Message channel
+        Slack private channel (DM)
     </a>
     between the user and DEv3 bot <strong>dropeverything</strong>. You will find in
     this section a full description of every message sent by DEv3 and how a user can interact with them.
   </blockquote>
 
   <h3 id="Messages-list">Messages definition</h3>
-  <p>
-    Messages related to the user activity on GitHub. They are built and delivered using
-    data from GitHub webhooks set before.</p>
   <h4 id="you-have-been-mentioned-msg">New mention</h4>
+  <p>
+    This message is received when the recipient is tagged in an issue description or an
+    issue or pull request comment.
+  </p>
   <img src="assets/images/you_have_been_mentioned_msg.png" width="60%"/>
-  <h4 id="comments-review-msg">Review submitted</h4>
-  <p>Comments review</p>
-  <img src="assets/images/comments_review_msg.png" width="60%"/>
-
+  <h4 id="review-submitted">Review submitted</h4>
+  <p>
+    Messages sent when a review is submitted to one of your pull requests. The format will
+    depend on the status of the review.
+    <a href="https://help.github.com/articles/about-pull-request-reviews/" target="_blank">
+      Learn more about GitHub reviews.
+    </a>
+  </p>
+  <li>
+    Comments
+    <br/>
+    <img src="assets/images/comments_review_msg.png" width="60%"/>
+  </li>
+  <li>
+    Approved
+    <br/>
+    <img src="assets/images/approved_review_msg.png" width="52%"/>
+  </li>
+  <li>
+    Changes requested
+    <br/>
+    <img src="assets/images/changes_requested_review_msg.png" width="58%"/>
+  </li>
+  <h4 id="review-requested-msg">Review requested</h4>
+    This message is received when someone sets the recipient as reviewer for a GitHub pull
+    request.
+    <img src="assets/images/review_requested_msg.png" width="60%"/>
   <h3 id="Message-interactions">Message interactions</h3>
   <p>
     DEv3 leverages a cool feature of Slack API namely <a
@@ -189,7 +212,8 @@ title: Documentation
   <div class="alert alert-warning" role="alert"> <strong>Note:</strong>
     The snoozed version of the message received doesn't have a mute button. You can only
     mute from the original message. It is so to keep consistency with the muting status of
-    the issue (or pull request), as it would be required to update all snoozed versions
-    of a message "Mute" button to reflect the status of the issue.
+    the issue shown on the button ("Mute Issue" = issue not muted / "Unmute" = issue muted),
+    as it would be required to update all "Mute" buttons of the original message's snoozed
+    versions to reflect the status of the issue.
   </div>
 </section>
