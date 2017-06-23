@@ -236,7 +236,17 @@ isHome: true
     GitHub for a specific set of actions undertaken by any collaborator on the repository.
   </blockquote>
 
-  <h3 id="Permissions-scope">Permissions scope</h3>
+  <h3 id="Add-webhook-manually">Add a webhook manually</h3>
   <p>
+    To add a GitHub webhook manually, follow <a
+      href="https://developer.github.com/webhooks/creating/">these instructions</a>. Use
+    these parameters :
+    <li><strong>Payload URL</strong> : https://api.gitbruh.bachirc.me/api/github/webhook</li>
+    <li><strong>Which events would you like to trigger this webhook?</strong> : "Let me
+      select individual events".</li>
+    <li>Select "Issue comment", "Issues", "Pull request" and "Pull request review" and
+      make sure "Push" is not selected</li>
+    <li>Check "Active" box</li>
+    <li>Click "Add webhook"</li>
   </p>
 </section>
