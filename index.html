@@ -23,37 +23,40 @@ isHome: true
 
   <h3 id="Add-GitBruh-to-Slack">Install GitBruh</h3>
   <p>
-    Click on the button "Add to Slack" in the homepage. You will be redirected to Slack
+    Click on the button <i>Add to Slack</i> in the homepage. You will be redirected to Slack
     authorization page. Choose the team to which you want to add GitBruh. Then, you will be redirected
     to GitHub authorization page.
   </p>
 
   <p>
-    If everything went well, you will be redirected to the homepage.
-    Read more about GitBruh authorization.
+    If everything went well, you will receive a welcome message with information on
+    getting more familiar with GitBruh.
   </p>
   <br/>
   <h3 id="Watch-repos">Watch a GitHub repository</h3>
   <p>
     To start receiving messages for a given repository, you first need to tell GitBruh. Use the
-    slash command in Slack <code>/watchrepos username/repo-name</code>. Make sure you are
+    <a href="{{site.github.url}}/#Slack-commands">Slack command</a> <code>/watchrepos username/repo-name</code>. Make sure you are
     on the team on which you added GitBruh.
 
-    A new GitHub webhook pointing to GitBruh is added to the repository you supplied (Learn
-    more about <code>/watchrepos</code>).
+    A new GitHub webhook pointing to GitBruh is added to the repository you supplied. Learn
+    more about <a href="{{site.github.url}}/#watchrepos"><code>/watchrepos</code></a>.
   </p>
 
   </br>
-  <p> <strong>And that's it !</strong> You should start receiving direct messages from
-    <strong>gitbruh</strong> bot (Learn more about GitBruh messages) when there is
-    some activity involving you in this repository.</p>
+  <p>
+    <strong>And that's it !</strong> You should start receiving <a
+      href="{{site.github.url}}/#GitHub-activity-messages">GitHub activity messages</a>
+    related to the newly watched repo from <strong>gitbruh</strong> Slack bot.
+  </p>
 </section>
 
 <section class="bs-docs-section">
   <h1 id="Slack-commands" class="page-header">Slack commands</h1>
 
   <blockquote>
-    GitBruh comes with a set of <a href="https://api.slack.com/slash-commands"> slack commands </a>
+    GitBruh comes with a set of <a href="https://api.slack.com/slash-commands"
+      target="_blank"> slack commands </a>
     to interact with users. These commands can be executed from any channel of
     a team where GitBruh is installed. All these commands are described in this section.
   </blockquote>
@@ -70,41 +73,45 @@ isHome: true
     Watch GitHub repositories by GitBruh.
   </p>
   <p>
-    You can specify one or multiple repos separated by a whitespace. When a repository is watched by a user, he will
-    start receiving messages related to this repo. A repo can be unwatched by issuing
-    <a href="{{site.github.url}}/doc.html#unwatchrepos"><code>/unwatchrepos</code></a>.
+    You can specify one or multiple repos separated by a whitespace. When a repository is
+    successfully watched by a user, he will start receiving messages related to this repo. A repo can be unwatched by issuing
+    <a href="{{site.github.url}}/#unwatchrepos"><code>/unwatchrepos</code></a>.
   </p>
   <p>
-    GitBruh will also try to add a GitHub webhook for each repo.
-    After issuing <code>/watchrepos</code>, GitBruh will respond with a messages containing
-    at most four sections. Each section regroups the repos that meet its description. Depending on the outcome,
-    the user will need to take further action to properly configure GitBruh for each one.
-  </p>
-  <p>
-    The following outcomes <strong>do not</strong> require any further action by the user :
-
-    <li>The user has the rights to add a webhook to the repo and the webhook doesn't exist yet. A new
-    GitHub webhook is added to the repo.</li>
-    <li>The user has the rights to add a webhook and the webhook already exists. Everything
-    is already in place !</li>
-  </p>
-  <p>
-    The following outcomes <strong>do</strong> require the user to take further actions :
+    Under the hood, two things are happening here (for each repo):
+    <li>GitBruh registers the repo as being watched by you.</li>
+    <li>GitBruh adds a GitHub webhook to the repo.</li>
+    <br/>
+    <p>
+      To receive messages related to the repo, the steps above <strong>must</strong> be
+      successful. If not, the response from <code>/watchrepos</code> will contain additional
+      information on further actions to take to properly set up the repo.
+    </p>
+    <h5>Response</h5>
+    <p>
+      The response contains at most three sections :
+    </p>
     <li>
-      The user doesn't have enough permissions to add a webhook. To start receiving
-      messages for this repo, another user with enough permissions needs to add the
-      webhook. He can do it by issuing <code>/watchrepos your-repo</code>(needs to install
-      GitBruh) or add it manually.  Once the webhook is configured, you will receive messages for
-      this repo even if you didn't add the webhook yourself.
+      <span style="color:green;">Green</span> : The repos listed in this section have been successfully watched by
+      GitBruh and a webhook is set on each repo (previous steps succeded both).
     </li>
     <li>
-      The repo has not been found. Either it's a mistyping error or the repo is
-      private and you need to give GitBruh access to it.
-      <a href="https://help.github.com/articles/requesting-organization-approval-for-oauth-apps/">See
-        GitHub Doc
-      </a>
+      <span style="color:orange;">Orange</span> : The repos listed has been registered by GitBruh as being watched by you
+      (step 1 succeeded) but the webhook couldn't be added because you don't have enough
+      permissions. The webhook has to be added by an owner by issuing <a href="{{site.github.url}}/#watchrepos"><code>/watchrepos</code></a>
+      or <a href="{{site.github.url}}/#Add-webhook-manually">manually</a>. After adding
+      the webhook, you don't need to re-issue <a href="{{site.github.url}}/#watchrepos"><code>/watchrepos</code></a>.
+    </li>
+    <li>
+      <span style="color:red;">Red</span> : GitBruh couldn't watch the repos or add a
+      webhook because it couldn't find them (both steps failed). This usually means that
+      you mistyped the repo name or you didn't authorize GitBruh to <a
+        href="https://help.github.com/articles/requesting-organization-approval-for-oauth-apps/"
+        target="_blank">access organization
+        repos</a>. After granting access, you will need to re-issue <a href="{{site.github.url}}/#watchrepos"><code>/watchrepos</code></a>.
     </li>
   </p>
+  <br/>
   <p>
     When no repos are supplied to the command, GitBruh will send an error message specifying
     the error details.
@@ -116,26 +123,30 @@ isHome: true
     <strong>Example</strong> : <code>/unwatchrepos john/awesome-stuff john/another-stuff</code>
   </p>
   <p>
-    Stops watching GitHub repositories by GitBruh.
+    Stop watching GitHub repositories by GitBruh.
   </p>
   <p>
     You can specify one or multiple repos separated by a whitespace. When a repository is
     unwatched, the user will stop receiving messages related to this repo. After issuing this
     command, GitBruh will respond with a message with at most two sections(defined by the
     outcomes below). Each section regroups the repos that meet its description. To watch again
-    <a href="{{site.github.url}}/doc.html#watchrepos"><code>/watchrepos</code></a>.
+    <a href="{{site.github.url}}/#watchrepos"><code>/watchrepos</code></a>.
     <div class="alert alert-warning" role="alert"> <strong>Note:</strong>  Webhooks must be deleted
       manually. Webhooks associated with unwatched repos are not deleted automatically
       because other users may still be watching these repos. Make sure it is not the case
       before deleting any webhook.</div>
   </p>
+
+  <h5>Response</h5>
   <p>
     After issuing <code>/unwatchrepos</code>, GitBruh will respond with a messages containing
     at most two sections :
-    <li>The repo has been unwatched. You will no longer receive messages related to
+    <li><span style="color:green;">Green</span> : The repo has been unwatched. You will no longer receive messages related to
       it.</li>
-    <li>The repo has not been found.</li>
+    <li><span style="color:red;">Red</span> : The repo has not been found. This usually means
+    it is a mistyping error or that the repo is not currently being watched by you.</li>
   </p>
+  <br/>
   <p>
     When no repos are supplied to the command, GitBruh will send an error message specifying
     the error details.
@@ -147,10 +158,12 @@ isHome: true
   <blockquote>
     Messages are the bread and butter of GitBruh. Their function is to notify the
     user via Slack about his activity on GitHub using GitHub webhooks. Messages are posted in the
-    <a href="https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages">
+    <a
+      href="https://get.slack.help/hc/en-us/articles/201925108-About-channels-and-direct-messages"
+      target="_blank">
         Slack private channel (DM)
     </a>
-    between the user and GitBruh bot <strong>dropeverything</strong>. You will find in
+    between the user and the GitBruh bot. You will find in
     this section a full description of every message sent by GitBruh and how a user can interact with them.
   </blockquote>
 
@@ -191,7 +204,7 @@ isHome: true
   <h3 id="Message-interactions">Message interactions</h3>
   <p>
     GitBruh leverages a cool feature of Slack API called <a
-      href="https://api.slack.com/interactive-messages"> interactive messages</a>.
+      href="https://api.slack.com/interactive-messages" target="_blank"> interactive messages</a>.
     Broadly, it allows a user to trigger one or multiple actions after receiving a Slack message
     containing elements for interacting with it (buttons, menus). GitBruh uses this API
     to allow users to interact with GitBruh messages in Slack by muting/unmuting issues or pull
@@ -199,18 +212,18 @@ isHome: true
   </p>
   <h4 id="Message-interactions-mute">Mute</h4>
   <p>
-    By clicking on the "Mute Issue" button, the user won't receive any
+    By clicking on the <i>Mute Issue</i> button, the user won't receive any
     further messages related to the issue. Clicking again will unmute the issue.
   </p>
   <h4 id="Message-interactions-unmute">Unmute</h4>
   <p>
-    By clicking on the "Unmute" button, the user will again receive messages related to
+    By clicking on the <i>Unmute</i> button, the user will again receive messages related to
     the issue. Clicking again will mute the issue.
   </p>
   <h4 id="Message-interactions-snooze">Snooze</h4>
   <p>
     A user can snooze a message to be able to act upon it at a more convenient moment. By
-    clicking on the "Snooze..." button, a menu will show with two options(1 hour or
+    clicking on the <i>Snooze...</i> button, a menu will show with two options (1 hour or
     tomorrow). The message will then be delivered at the chosen moment.
   </p>
   <img src="assets/images/message_interactions_snooze.png" width="60%"/>
@@ -223,9 +236,9 @@ isHome: true
   <div class="alert alert-warning" role="alert"> <strong>Note:</strong>
     The snoozed version of the message received doesn't have a mute button. You can only
     mute from the original message. It is so to keep consistency with the muting status of
-    the issue shown on the button ("Mute Issue" = issue not muted / "Unmute" = issue muted),
-    as it would be required to update all "Mute" buttons of the original message's snoozed
-    versions to reflect the status of the issue.
+    the issue shown on the button (<i>Mute Issue</i> = issue not muted / <i>Unmute</i> = issue muted),
+    as it would be required to update the <i>Mute</i>/<i>Unmute</i> buttons of all snoozed versions to
+    reflect the status of the issue.
   </div>
 </section>
 <section class="bs-docs-section">
@@ -239,15 +252,16 @@ isHome: true
   <h3 id="Add-webhook-manually">Add a webhook manually</h3>
   <p>
     To add a GitHub webhook manually, follow <a
-      href="https://developer.github.com/webhooks/creating/">these instructions</a>. Use
+      href="https://developer.github.com/webhooks/creating/" target="_blank">these instructions</a>. Use
     these parameters :
-    <li><strong>Payload URL</strong> : https://api.gitbruh.bachirc.me/api/github/webhook</li>
-    <li><strong>Content type</strong> : application/json</li>
-    <li><strong>Which events would you like to trigger this webhook?</strong> : "Let me
-      select individual events".</li>
-    <li>Select "Issue comment", "Issues", "Pull request" and "Pull request review" and
-      make sure "Push" is not selected</li>
-    <li>Check "Active" box</li>
-    <li>Click "Add webhook"</li>
+    <li><strong>Payload URL</strong> :
+      <i>https://api.gitbruh.bachirc.me/api/github/webhook</i></li>
+    <li><strong>Content type</strong> : <i>application/json</i></li>
+    <li><strong>Which events would you like to trigger this webhook?</strong> : <i>Let me
+        select individual events.</i></li>
+    <li>Select <i>Issue comment</i>, <i>Issues</i>, <i>Pull request</i> and <i>Pull
+        request review</i> and make sure <i>Push</i> is not selected</li>
+    <li>Check <i>Active</i> box</li>
+    <li>Click <i>Add webhook</i></li>
   </p>
 </section>
